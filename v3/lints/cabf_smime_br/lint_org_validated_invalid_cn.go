@@ -42,7 +42,8 @@ func NewOrgValidatedInvalidCN() lint.LintInterface {
 }
 
 func (l *OrgValidatedInvalidCN) CheckApplies(c *x509.Certificate) bool {
-	return util.IsSubscriberCert(c) && util.IsOrganizationValidatedCertificate(c) && c.Subject.CommonName != ""
+	return util.IsSubscriberCert(c) && util.IsOrganizationValidatedCertificate(c) &&
+		len(c.Subject.Organization) > 0
 }
 
 func isEmail(s string) bool {
@@ -56,7 +57,7 @@ func isEmail(s string) bool {
 func (l *OrgValidatedInvalidCN) Execute(c *x509.Certificate) *lint.LintResult {
 
 	if isEmail(c.Subject.CommonName) ||
-		(len(c.Subject.Organization) > 0 && c.Subject.CommonName == c.Subject.Organization[0]) {
+		c.Subject.CommonName == c.Subject.Organization[0] {
 		return &lint.LintResult{Status: lint.Pass}
 	}
 
