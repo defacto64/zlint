@@ -27,7 +27,7 @@ func init() {
 		LintMetadata: lint.LintMetadata{
 			Name:          "w_suspicious_chars_in_address",
 			Description:   "Checks for suspicious characters in Subject locality and/or stateOrProvince",
-			Citation:      "Fill this in...",
+			Citation:      "Do not know what to say here...",
 			Source:        lint.Community,
 			EffectiveDate: util.ZeroDate,
 		},
